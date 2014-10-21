@@ -1,78 +1,315 @@
 <!doctype html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Checkout Html&#39;s for Testing purposes by axcoro</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title></title>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type="text/css">
+      .hide {
+        display: none !important;
+      }
 
+      .panel-up, .panel-down {
+        width: 100%;
+        float: left;
+        min-height: 150px;
+      }
+
+      .panel-left, .panel-right {
+        width: 40%;
+        float: left;
+        min-height: 150px;
+      }
+
+      .panel {
+        margin-left: 5%;
+      }
+
+      .sbs {
+        display: inline-block;
+        vertical-align: top;
+      }
+
+      body {
+        font-family: Helvetica;
+      }
+
+    </style>    
   </head>
   <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/axcoro/checkout-tests">View On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/axcoro/checkout-tests/zipball/master">ZIP</a></li>
-          <li class="downloads"><a href="https://github.com/axcoro/checkout-tests/tarball/master">TAR</a></li>
-          <li class="title">DOWNLOADS</li>
-        </nav>
-      </div><!-- end header -->
+    <div class="panel-up">
+      <div class="panel panel-right">
+        <h1>Crear Preferencia</h1>
+        <p>Título: <input id="title" type="text" value="Preferencia de prueba" size="35"></p>
+        <p>Valor: <input id="price" type="number" value="10" min="1"></p>
+        <p>
+          Test user
+          <select id="test-users">
+            <option value="MLA" selected="selected">MLA</option>
+            <option value="MLB">MLB</option>
+            <option value="MLM">MLM</option>
+            <option value="MLV">MLV</option>  
+            <option value="MCO">MCO</option>
+            <option value="MLC">MLC</option>
+          </select>
+        </p>
+        <p>client_id: <input id="client_id" type="text" value=""  size="35"></p>
+        <p>client_secret: <input id="client_secret" type="text" value="" size="35"></p>
+        <p><input type="button" name="pay-button" value="Crear"></p>
 
-    <div class="wrapper">
-
-      <section>
-        <div id="title">
-          <h1>Checkout Html&#39;s for Testing purposes</h1>
-          <p>Htmls de pruebas</p>
-          <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/axcoro">axcoro</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+      </div>
+      <div class="panel panel-left">
+        <h1>Cargar Preferencia</h1>
+        <input type="text" id="prefId" size="70" value=""/>
+        <select id="pooles">
+          <option value="alpha">Alpha</option>
+          <option value="beta" selected="">Beta</option>
+          <option value="mla">MLA</option>
+          <option value="mlb">MLB</option>
+          <option value="mlv">MLV</option>
+          <option value="mco">MCO</option>
+          <option value="">Rola</option>
+        </select>
+        <input type="button" id="btnLoad" value="Cargar" />
+        <br><a id="pref-preview" href="" target="_blank"></a>
+      </div>
+    </div>
+    <div class="panel-down">
+      <div id="t-mode" class="hide">
+        <h1>mp-mode</h1>
+        <input type="button" name="t-mode" data-url="#" data-mode="modal" value="Abrir Modal" />
+        <input type="button" name="t-mode" data-url="#" data-mode="popup" value="Abrir Popup" />
+        <input type="button" name="t-mode" data-url="#" data-mode="blank" value="Abrir Blank" />
+        <input type="button" name="t-mode" data-url="#" data-mode="redirect" value="Abrir Redirect" />
+      </div>
+      <div class="hide sbs">
+        <h1>Iframe</h1>
+        <div>
+          <input id="t-width" type="number" min="1" value="815"> x <input id="t-height" type="number" min="1" value="540"> <input id="btn-resize" type="button" value="cambiar"><input id="btn-reset" type="button" value="reset"> 
         </div>
-
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
+        <iframe id="t-iframe" src="" name="MP-Checkout" width="815" height="540" frameborder="1"></iframe>
+      </div>
+      <div class="hide sbs">
+        <h1>Mobile</h1>
+        <div>
+          <input id="t-mobile-width" type="number" min="1" value="384"> x <input id="t-mobile-height" type="number" min="1" value="640"> <input id="btn-mobile-resize" type="button" value="cambiar"><input id="btn-mobile-reset" type="button" value="reset"> 
+        </div>
+        <iframe id="t-mobile" src="" sandbox="" name="MP-Checkout" width="384" height="640" frameborder="1"></iframe>
+      </div>
 
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.mercadopago.com/org-img/jsapi/mptools/buttons/render.js"></script>
+    <script type="text/javascript">
+
+      var users = {
+        "MLA": {"client_id": "8915767188486910", "client_secret": "L9yAtxq4RPhBAArbVXfiSMbZvihFiCUf"},
+        "MLB": {"client_id": "1498091458334340", "client_secret": "RQggDMA2g6V9saeZKVSMh2WxZWWCpbCd"},
+        "MLM": {"client_id": "5437095693898413", "client_secret": "mnYiKZ3p0V943Gx3IxLVzGOxKj27XIRb"},
+        "MLV": {"client_id": "630121165566171", "client_secret": "F25NdU4PPyWJ3cltJWBhhQe8q4cSP9Ic"},
+        "MCO": {"client_id": "8076214246968536", "client_secret": "ANLO8yH0EvFWW6O5a8iSEgYHWJW9u4fP"},
+        "MLC": {"client_id": "3856579257398553", "client_secret": "UH1RawXin8oHgcAm5727ui4MY64cPZuW"}
+      };
+
+      function setUpMpMode(url) {
+        var els = $("[name='t-mode']");
+
+        els.each(function (idx, el) {
+          $(el).attr("data-url", url);
+        });
+
+        els.on("click", function (evt) {
+          var el = $(evt.target);
+          $MPC.openCheckout({
+            url: el.attr("data-url") + "&mobile=true",
+            mode: el.attr("data-mode")
+          });
+        });
+
+        $("#t-mode").removeClass("hide");
+
+      }
+
+      function setUpIframe(url) {
+        var e = $("#t-iframe");
+        e.attr("src", url);
+        e.parent().removeClass("hide");
+      }
+
+      function setUpMobile(url) {
+        var e = $("#t-mobile");
+        e.attr("src", url);
+        e.parent().removeClass("hide");
+      }
+
+      function setupPref(pref) {
+
+        var pool = $("#pooles").val();
+        var url = "https://www.mercadopago.com/" + (pool ? pool + "/" : "") + "checkout/pay?pref_id=" + pref;
+        setTimeout(function () {
+          setUpMpMode(url);
+        }, 0);
+        setTimeout(function () {
+          setUpIframe(url);
+        }, 0);
+        setTimeout(function () {
+          setUpMobile(url);
+        }, 0);
+      }
+
+      function loadPref() {
+        var pref = $("#prefId").val();
+        if (!pref)
+          return;
+        setupPref(pref);
+        $("#pooles").trigger("change");
+      }
+
+
+      function get_access_token(cb) {
+        $.ajax({
+          type: "POST",
+          url: "https://api.mercadolibre.com/oauth/token",
+          data: {
+            "grant_type": "client_credentials",
+            "client_id": $('#client_id').val(),
+            "client_secret": $('#client_secret').val()
+          },
+          success: function (data, status, xhr) {
+            if (cb)
+              cb(data, status, xhr);
+          },
+          dataType: "json"
+        });
+      }
+
+      function create_preference(access_token, title, price, cb) {
+        var json = {
+          "items": [
+            {
+              "title": title,
+              "quantity": 1,
+              "unit_price": parseFloat(price),
+            }
+          ]
+        };
+
+        $.ajax({
+          type: "POST",
+          url: "https://api.mercadolibre.com/checkout/preferences?access_token=" + access_token,
+          contentType: "application/json",
+          dataType: "json",
+          data: JSON.stringify(json),
+          success: function (data, status, xhr) {
+            if (cb)
+              cb(data, status, xhr);
+          },
+          error: function (err) {
+            alert("Error:" + JSON.stringify(err));
+          }
+        });
+      }
+
+      function do_pay(title, price) {
+        get_access_token(function (data) {
+          create_preference(data.access_token, title, price, function (data) {
+            $("#prefId").val(data.id);
+            loadPref();
+          });
+        });
+      }
+
+
+      $(document).ready(function () {
+        $('[name="pay-button"]').on("click", function () {
+
+          var _that = $(this),
+              prev_btn_val = _that.val(),
+              title = $('#title').val(),
+              price = $('#price').val();
+
+          if (!price) {
+            alert("Verifique valor");
+            return;
+          }
+
+          _that.attr("value", "Procesando..");
+          _that.attr("disabled", "disabled");
+
+          do_pay(title, price);
+
+          setTimeout(function (_this, prev_btn_val) {
+            _this.attr("value", prev_btn_val);
+            _this.removeAttr("disabled");
+          }, 3000, _that, prev_btn_val);
+        });
+
+        $("#btnLoad").on("click", loadPref);
+        $("#pooles").on("change", function () {
+          var pref = $("#prefId").val();
+          if (!pref)
+            return;
+          var pool = $("#pooles").val();
+          var url = "https://www.mercadopago.com/" + (pool ? pool + "/" : "") + "checkout/pay?pref_id=" + pref;
+          $("#pref-preview").attr("href", url);
+          $("#pref-preview").html(url);
+        });
+
+        $("#btn-resize").on("click", function () {
+          var url = $("#t-iframe").attr("src");
+
+          var w = $("#t-width").val();
+          var h = $("#t-height").val();
+
+          $("#t-iframe").attr("src", "#");
+          $("#t-iframe").attr("width", w);
+          $("#t-iframe").attr("height", h);
+          $("#t-iframe").attr("src", url);
+        });
+        $("#btn-reset").on("click", function () {
+          $("#t-width").val(815);
+          $("#t-height").val(540);
+          $("#btn-resize").click();
+        });
+
+        $("#btn-mobile-resize").on("click", function () {
+          var url = $("#t-mobile").attr("src");
+
+          var w = $("#t-mobile-width").val();
+          var h = $("#t-mobile-height").val();
+
+          $("#t-mobile").attr("src", "#");
+          $("#t-mobile").attr("width", w);
+          $("#t-mobile").attr("height", h);
+          $("#t-mobile").attr("src", url);
+        });
+        $("#btn-mobile-reset").on("click", function () {
+          $("#t-mobile-width").val(384);
+          $("#t-mobile-height").val(640);
+          $("#btn-mobile-resize").click();
+        });
+
+        $("#test-users").on("change", function () {
+          var user = $(this).val();
+          var credentials = users[user];
+
+          $("#client_id").val(credentials.client_id);
+          $("#client_secret").val(credentials.client_secret);
+        });
+
+        $("#t-mobile").on("load", function () {
+          var src = $(this).attr("src");
+
+          if(src && src.indexOf("&mobile=true") === -1) {
+            $("#t-mobile").attr("src", src + "&mobile=true");
+          }
+        });
+        $("#test-users").trigger("change");
+      });
+
+
+    </script>
   </body>
 </html>
