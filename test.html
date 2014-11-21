@@ -1,0 +1,210 @@
+<!doctype html>
+<html>
+  <head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type="text/css">
+      .hide {
+        display: none !important;
+      }
+
+      .panel-up, .panel-down {
+        width: 100%;
+        float: left;
+        min-height: 150px;
+      }
+
+      .panel-left, .panel-right {
+        width: 40%;
+        float: left;
+        min-height: 150px;
+      }
+
+      .panel {
+        margin-left: 5%;
+      }
+
+      .sbs {
+        display: inline-block;
+        vertical-align: top;
+      }
+
+      body {
+        font-family: Helvetica;
+      }
+
+    </style>    
+  </head>
+  <body>
+   
+    <div class="">
+      <div id="t-mode" class="hide">
+        <h1>mp-mode</h1>
+        <input type="button" name="t-mode" data-url="#" data-mode="modal" value="Abrir Modal" />
+        <input type="button" name="t-mode" data-url="#" data-mode="popup" value="Abrir Popup" />
+        <input type="button" name="t-mode" data-url="#" data-mode="blank" value="Abrir Blank" />
+        <input type="button" name="t-mode" data-url="#" data-mode="redirect" value="Abrir Redirect" />
+      </div>
+      <div class="hide sbs">
+        <h1>Iframe</h1>
+        <div>
+          <input id="t-width" type="number" min="1" value="815"> x <input id="t-height" type="number" min="1" value="540"> <input id="btn-resize" type="button" value="cambiar"><input id="btn-reset" type="button" value="reset"> 
+        </div>
+        <iframe id="t-iframe" src="" name="MP-Checkout" width="815" height="540" frameborder="1"></iframe>
+      </div>
+      <div class="hide sbs">
+        <h1>Mobile</h1>
+        <div>
+          <input id="t-mobile-width" type="number" min="1" value="384"> x <input id="t-mobile-height" type="number" min="1" value="640"> <input id="btn-mobile-resize" type="button" value="cambiar"><input id="btn-mobile-reset" type="button" value="reset"> 
+        </div>
+      </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.mercadopago.com/org-img/jsapi/mptools/buttons/render.js"></script>
+    <script type="text/javascript">
+
+      function setUpMpMode(url) {
+        var els = $("[name='t-mode']");
+
+        els.each(function (idx, el) {
+          $(el).attr("data-url", url);
+        });
+
+        els.on("click", function (evt) {
+          var el = $(evt.target);
+          $MPC.openCheckout({
+            url: el.attr("data-url") ,
+            mode: el.attr("data-mode")
+          });
+        });
+
+        $("#t-mode").removeClass("hide");
+
+      }
+
+      function setUpIframe(url) {
+
+        var e = $("#t-iframe");
+        e.attr("src", url);
+        e.parent().removeClass("hide");
+
+      }
+
+      function setUpMobile(url) {
+
+        var e = $("#t-mobile");
+        e.attr("src", url);
+        e.parent().removeClass("hide");
+
+      }
+
+      function setupPref(pref, pool, mode) {
+
+        var url = "https://www.mercadopago.com/" + (pool ? pool + "/" : "") + "checkout/pay?pref_id=" + pref;
+        setTimeout(function () {
+          setUpMpMode(url);
+        }, 0);
+        setTimeout(function () {
+          setUpIframe(url);
+        }, 0);
+        setTimeout(function () {
+          setUpMobile(url);
+        }, 0);
+      }
+
+      $(document).ready(function () {
+
+        function getParameterByName(name) {
+        
+          name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+          var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+          results = regex.exec(location.search);
+          return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        
+        }
+
+        var pref_id = getParameterByName('pref_id');
+        var pool = getParameterByName('pool');
+        var mode = getParameterByName('mode');
+        var w = getParameterByName('w') ? getParameterByName('w') : "";
+        var h = getParameterByName('h') ? getParameterByName('h') : "";
+
+        if(pref_id && pool && mode){
+        
+          setupPref(pref_id, pool, mode);
+        
+        }
+        /*
+        $("#pooles").on("change", function () {
+          var pref = $("#prefId").val();
+          if (!pref)
+            return;
+          var pool = $("#pooles").val();
+          var url = "https://www.mercadopago.com/" + (pool ? pool + "/" : "") + "checkout/pay?pref_id=" + pref;
+          $("#pref-preview").attr("href", url);
+          $("#pref-preview").html(url);
+        });
+        */
+
+        $("#btn-resize").on("click", function () {
+          var url = $("#t-iframe").attr("src");
+
+          var w = $("#t-width").val();
+          var h = $("#t-height").val();
+
+          $("#t-iframe").attr("src", "#");
+          $("#t-iframe").attr("width", w);
+          $("#t-iframe").attr("height", h);
+          $("#t-iframe").attr("src", url);
+        });
+        $("#btn-reset").on("click", function () {
+          $("#t-width").val(815);
+          $("#t-height").val(540);
+          $("#btn-resize").click();
+        });
+
+        $("#btn-mobile-resize").on("click", function () {
+          var url = $("#t-mobile").attr("src");
+
+          var w = $("#t-mobile-width").val();
+          var h = $("#t-mobile-height").val();
+
+          $("#t-mobile").attr("src", "#");
+          $("#t-mobile").attr("width", w);
+          $("#t-mobile").attr("height", h);
+          $("#t-mobile").attr("src", url);
+        });
+
+        $("#btn-mobile-reset").on("click", function () {
+          $("#t-mobile-width").val(384);
+          $("#t-mobile-height").val(640);
+          $("#btn-mobile-resize").click();
+        });
+        /*
+        $("#test-users").on("change", function () {
+          var user = $(this).val();
+          var credentials = users[user];
+
+          $("#client_id").val(credentials.client_id);
+          $("#client_secret").val(credentials.client_secret);
+        });
+        */
+
+        $("#t-mobile").on("load", function () {
+          var src = $(this).attr("src");
+
+          if(src && src.indexOf("&mobile=true") === -1) {
+            $("#t-mobile").attr("src", src + "&mobile=true");
+          }
+        });
+       // $("#test-users").trigger("change");
+      });
+
+
+    </script>
+  </body>
+</html>
