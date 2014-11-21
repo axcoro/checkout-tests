@@ -40,13 +40,14 @@
   <body>
    
     <div class="">
+          <!--
       <div id="t-mode" class="hide">
         <h1>mp-mode</h1>
         <input type="button" name="t-mode" data-url="#" data-mode="modal" value="Abrir Modal" />
         <input type="button" name="t-mode" data-url="#" data-mode="popup" value="Abrir Popup" />
         <input type="button" name="t-mode" data-url="#" data-mode="blank" value="Abrir Blank" />
         <input type="button" name="t-mode" data-url="#" data-mode="redirect" value="Abrir Redirect" />
-      </div>
+      </div> -->
       <div class="hide sbs">
         <h1>Iframe</h1>
         <div>
@@ -67,38 +68,14 @@
     <script type="text/javascript" src="https://www.mercadopago.com/org-img/jsapi/mptools/buttons/render.js"></script>
     <script type="text/javascript">
 
-      function setUpMpMode(url) {
-        var els = $("[name='t-mode']");
-
-        els.each(function (idx, el) {
-          $(el).attr("data-url", url);
-        });
-
-        els.on("click", function (evt) {
-          var el = $(evt.target);
+      function setUpMode(url,mode) {
+        
           $MPC.openCheckout({
-            url: el.attr("data-url") ,
-            mode: el.attr("data-mode")
+            url: url,
+            mode: mode
           });
-        });
 
         $("#t-mode").removeClass("hide");
-
-      }
-
-      function setUpIframe(url) {
-
-        var e = $("#t-iframe");
-        e.attr("src", url);
-        e.parent().removeClass("hide");
-
-      }
-
-      function setUpMobile(url) {
-
-        var e = $("#t-mobile");
-        e.attr("src", url);
-        e.parent().removeClass("hide");
 
       }
 
@@ -106,14 +83,9 @@
 
         var url = "https://www.mercadopago.com/" + (pool ? pool + "/" : "") + "checkout/pay?pref_id=" + pref;
         setTimeout(function () {
-          setUpMpMode(url);
+          setUpMode(url,mode);
         }, 0);
-        setTimeout(function () {
-          setUpIframe(url);
-        }, 0);
-        setTimeout(function () {
-          setUpMobile(url);
-        }, 0);
+
       }
 
       $(document).ready(function () {
@@ -138,21 +110,9 @@
           setupPref(pref_id, pool, mode);
         
         }
-        /*
-        $("#pooles").on("change", function () {
-          var pref = $("#prefId").val();
-          if (!pref)
-            return;
-          var pool = $("#pooles").val();
-          var url = "https://www.mercadopago.com/" + (pool ? pool + "/" : "") + "checkout/pay?pref_id=" + pref;
-          $("#pref-preview").attr("href", url);
-          $("#pref-preview").html(url);
-        });
-        */
+        if( w && h){
 
-        $("#btn-resize").on("click", function () {
           var url = $("#t-iframe").attr("src");
-
           var w = $("#t-width").val();
           var h = $("#t-height").val();
 
@@ -160,13 +120,9 @@
           $("#t-iframe").attr("width", w);
           $("#t-iframe").attr("height", h);
           $("#t-iframe").attr("src", url);
-        });
-        $("#btn-reset").on("click", function () {
-          $("#t-width").val(815);
-          $("#t-height").val(540);
-          $("#btn-resize").click();
-        });
-
+        
+        }
+        /* //MOBILE
         $("#btn-mobile-resize").on("click", function () {
           var url = $("#t-mobile").attr("src");
 
@@ -184,15 +140,6 @@
           $("#t-mobile-height").val(640);
           $("#btn-mobile-resize").click();
         });
-        /*
-        $("#test-users").on("change", function () {
-          var user = $(this).val();
-          var credentials = users[user];
-
-          $("#client_id").val(credentials.client_id);
-          $("#client_secret").val(credentials.client_secret);
-        });
-        */
 
         $("#t-mobile").on("load", function () {
           var src = $(this).attr("src");
@@ -201,7 +148,8 @@
             $("#t-mobile").attr("src", src + "&mobile=true");
           }
         });
-       // $("#test-users").trigger("change");
+      */
+       
       });
 
 
