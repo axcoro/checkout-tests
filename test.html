@@ -88,6 +88,15 @@
 
       }
 
+      function setupPref(pref, pool, mode, logout) {
+
+        var url = "https://www.mercadopago.com/" + (pool ? pool + "/" : "") + "checkout/pay?pref_id=" + pref+"&logout="+logout;
+        setTimeout(function () {
+          setUpMode(url,mode);
+        }, 0);
+
+      }
+
       $(document).ready(function () {
 
         function getParameterByName(name) {
@@ -102,12 +111,18 @@
         var pref_id = getParameterByName('pref_id');
         var pool = getParameterByName('pool');
         var mode = getParameterByName('mode');
+        var logout = getParameterByName('logout')
         var w = getParameterByName('w') ? getParameterByName('w') : "";
         var h = getParameterByName('h') ? getParameterByName('h') : "";
 
         if(pref_id && pool && mode){
         
           setupPref(pref_id, pool, mode);
+        
+        }
+        if(pref_id && pool && mode && logout){
+        
+          setupPref(pref_id, pool, mode, logout);
         
         }
         if( w && h){
