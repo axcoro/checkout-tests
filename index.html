@@ -91,13 +91,13 @@
         </div>
         <iframe id="t-iframe" src="" name="MP-Checkout" width="815" height="540" frameborder="1"></iframe>
       </div>
-      <div class="hide sbs">
+      <!-- <div class="hide sbs">
         <h1>Mobile</h1>
         <div>
           <input id="t-mobile-width" type="number" min="1" value="384"> x <input id="t-mobile-height" type="number" min="1" value="640"> <input id="btn-mobile-resize" type="button" value="cambiar"><input id="btn-mobile-reset" type="button" value="reset"> 
         </div>
         <iframe id="t-mobile" src="" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts" name="MP-Checkout" width="384" height="640" frameborder="1"></iframe>
-      </div>
+      </div> -->
 
     </div>
 
@@ -124,7 +124,7 @@
         els.on("click", function (evt) {
           var el = $(evt.target);
           $MPC.openCheckout({
-            url: el.attr("data-url") + "&mobile=true",
+            url: el.attr("data-url"),
             mode: el.attr("data-mode")
           });
         });
@@ -139,11 +139,11 @@
         e.parent().removeClass("hide");
       }
 
-      function setUpMobile(url) {
-        var e = $("#t-mobile");
-        e.attr("src", url);
-        e.parent().removeClass("hide");
-      }
+      // function setUpMobile(url) {
+      //   var e = $("#t-mobile");
+      //   e.attr("src", url);
+      //   e.parent().removeClass("hide");
+      // }
 
       function setupPref(pref) {
 
@@ -155,9 +155,9 @@
         setTimeout(function () {
           setUpIframe(url);
         }, 0);
-        setTimeout(function () {
-          setUpMobile(url);
-        }, 0);
+        // setTimeout(function () {
+        //   setUpMobile(url);
+        // }, 0);
       }
 
       function loadPref() {
@@ -275,22 +275,20 @@
           $("#btn-resize").click();
         });
 
-        $("#btn-mobile-resize").on("click", function () {
-          var url = $("#t-mobile").attr("src");
-
-          var w = $("#t-mobile-width").val();
-          var h = $("#t-mobile-height").val();
-
-          $("#t-mobile").attr("src", "#");
-          $("#t-mobile").attr("width", w);
-          $("#t-mobile").attr("height", h);
-          $("#t-mobile").attr("src", url);
-        });
-        $("#btn-mobile-reset").on("click", function () {
-          $("#t-mobile-width").val(384);
-          $("#t-mobile-height").val(640);
-          $("#btn-mobile-resize").click();
-        });
+        // $("#btn-mobile-resize").on("click", function () {
+        //   var url = $("#t-mobile").attr("src");
+        //   var w = $("#t-mobile-width").val();
+        //   var h = $("#t-mobile-height").val();
+        //   $("#t-mobile").attr("src", "#");
+        //   $("#t-mobile").attr("width", w);
+        //   $("#t-mobile").attr("height", h);
+        //   $("#t-mobile").attr("src", url);
+        // });
+        // $("#btn-mobile-reset").on("click", function () {
+        //   $("#t-mobile-width").val(384);
+        //   $("#t-mobile-height").val(640);
+        //   $("#btn-mobile-resize").click();
+        // });
 
         $("#test-users").on("change", function () {
           var user = $(this).val();
@@ -300,13 +298,12 @@
           $("#client_secret").val(credentials.client_secret);
         });
 
-        $("#t-mobile").on("load", function () {
-          var src = $(this).attr("src");
-
-          if(src && src.indexOf("&mobile=true") === -1) {
-            $("#t-mobile").attr("src", src + "&mobile=true");
-          }
-        });
+        // $("#t-mobile").on("load", function () {
+        //   var src = $(this).attr("src");
+        //   if(src && src.indexOf("&mobile=true") === -1) {
+        //     $("#t-mobile").attr("src", src + "&mobile=true");
+        //   }
+        // });
         $("#test-users").trigger("change");
       });
 
