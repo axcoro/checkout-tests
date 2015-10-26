@@ -1,278 +1,321 @@
 <!doctype html>
 <html>
-  <head>
+
+<head>
     <title>Checkout Tests</title>
     <meta charset="utf-8" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <style type="text/css">
-      .hide {
+    .hide {
         display: none !important;
-      }
-
-      .panel-up, .panel-down {
+    }
+    
+    .panel-up,
+    .panel-down {
         width: 100%;
         float: left;
         min-height: 150px;
-      }
-
-      .panel-left, .panel-right {
+    }
+    
+    .panel-left,
+    .panel-right {
         width: 40%;
         float: left;
         min-height: 150px;
-      }
+    }
 
-      .panel {
+    /*
+    .panel {
         margin-left: 5%;
-      }
-
-      .sbs {
+    }
+    */
+    
+    .sbs {
         display: inline-block;
         vertical-align: top;
-      }
-
-      body {
+    }
+    
+    body {
         font-family: Helvetica;
-      }
+    }
+    </style>
+</head>
 
-    </style>    
-  </head>
-  <body>
+<body>
     <div class="panel-up">
-      <div class="panel panel-right">
-        <h1>Crear Preferencia</h1>
-        <p>Título: <input id="title" type="text" value="Preferencia de prueba" size="35"></p>
-        <p>Valor: <input id="price" type="number" value="1000" min="1"></p>
-        <p>
-          Test user
-          <select id="test-users">
-            <option value="MLA" selected="selected">MLA</option>
-            <option value="MLB">MLB</option>
-            <option value="MLM">MLM</option>
-            <option value="MLV">MLV</option>  
-            <option value="MCO">MCO</option>
-            <option value="MLC">MLC</option>
-          </select>
-        </p>
-        <p>client_id: <input id="client_id" type="text" value=""  size="35"></p>
-        <p>client_secret: <input id="client_secret" type="text" value="" size="35"></p>
-        <p><input type="button" name="pay-button" value="Crear"></p>
-
-      </div>
-      <div class="panel panel-left">
-        <h1>Cargar Preferencia</h1>
-        <input type="text" id="prefId" size="70" value=""/>
-        <select id="pooles">
-          <option value="alpha">Alpha</option>
-          <option value="beta" selected="">Beta</option>
-          <option value="mla">MLA</option>
-          <option value="mlb">MLB</option>
-          <option value="mlv">MLV</option>
-          <option value="mco">MCO</option>
-          <option value="mlm">MLM</option>
-          <option value="">ROLA</option>
-        </select>
-        <input type="button" id="btnLoad" value="Cargar" />
-        <br><a id="pref-preview" href="" target="_blank"></a>
-      </div>
+        <div class="panel panel-right">
+            <h1>Crear Preferencia</h1>
+            <p>Título:
+                <input id="title" type="text" value="Preferencia de prueba" size="35">
+            </p>
+            <p>Valor:
+                <input id="price" type="number" value="1000" min="1">
+            </p>
+            <p>
+                Test user
+                <select id="test-users">
+                    <option value="MLA" selected="selected">MLA</option>
+                    <option value="MLB">MLB</option>
+                    <option value="MLM">MLM</option>
+                    <option value="MLV">MLV</option>
+                    <option value="MCO">MCO</option>
+                    <option value="MLC">MLC</option>
+                </select>
+            </p>
+            <p>client_id:
+                <input id="client_id" type="text" value="" size="35">
+            </p>
+            <p>client_secret:
+                <input id="client_secret" type="text" value="" size="35">
+            </p>
+            <p>
+                <input type="button" name="pay-button" value="Crear">
+            </p>
+        </div>
+        <div class="panel panel-left">
+            <h1>Cargar Preferencia</h1>
+            <input type="text" id="prefId" size="70" value="" />
+            <select id="pooles">
+                <option value="alpha">Alpha</option>
+                <option value="beta" selected="">Beta</option>
+                <option value="mla">MLA</option>
+                <option value="mlb">MLB</option>
+                <option value="mlv">MLV</option>
+                <option value="mco">MCO</option>
+                <option value="mlm">MLM</option>
+                <option value="">ROLA</option>
+            </select>
+            <input type="button" id="btnLoad" value="Cargar" />
+            <br>
+            <a id="pref-preview" href="" target="_blank"></a>
+        </div>
     </div>
     <div class="panel-down">
-      <div id="t-mode" class="hide">
-        <h1>mp-mode</h1>
-        <input type="button" name="t-mode" data-url="#" data-mode="modal" value="Abrir Modal" />
-        <input type="button" name="t-mode" data-url="#" data-mode="popup" value="Abrir Popup" />
-        <input type="button" name="t-mode" data-url="#" data-mode="blank" value="Abrir Blank" />
-        <input type="button" name="t-mode" data-url="#" data-mode="redirect" value="Abrir Redirect" />
-      </div>
-      <div class="hide sbs">
-        <h1>Iframe</h1>
-        <div>
-          <input id="t-width" type="number" min="1" value="815"> x <input id="t-height" type="number" min="1" value="540"> <input id="btn-resize" type="button" value="cambiar"><input id="btn-reset" type="button" value="reset"> 
+        <div id="t-mode" class="hide">
+            <h1>mp-mode</h1>
+            <input type="button" name="t-mode" data-url="#" data-mode="modal" value="Abrir Modal" />
+            <input type="button" name="t-mode" data-url="#" data-mode="popup" value="Abrir Popup" />
+            <input type="button" name="t-mode" data-url="#" data-mode="blank" value="Abrir Blank" />
+            <input type="button" name="t-mode" data-url="#" data-mode="redirect" value="Abrir Redirect" />
+            <input type="button" name="t-mode" data-url="#" data-mode="iframe" value="Abrir Iframe" />
         </div>
-        <iframe id="t-iframe" src="" name="MP-Checkout" width="815" height="540" frameborder="1"></iframe>
-      </div>
-      <!-- <div class="hide sbs">
+        <div class="hide sbs">
+            <h1>Iframe</h1>
+            <div>
+                <input id="t-width" type="number" min="1" value="815"> x
+                <input id="t-height" type="number" min="1" value="540">
+                <input id="btn-resize" type="button" value="cambiar">
+                <input id="btn-reset" type="button" value="reset">
+            </div>
+            <iframe id="t-iframe" src="" name="MP-Checkout" width="815" height="540" frameborder="1"></iframe>
+        </div>
+        <!-- <div class="hide sbs">
         <h1>Mobile</h1>
         <div>
           <input id="t-mobile-width" type="number" min="1" value="384"> x <input id="t-mobile-height" type="number" min="1" value="640"> <input id="btn-mobile-resize" type="button" value="cambiar"><input id="btn-mobile-reset" type="button" value="reset"> 
         </div>
         <iframe id="t-mobile" src="" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts" name="MP-Checkout" width="384" height="640" frameborder="1"></iframe>
       </div> -->
-
     </div>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.mercadopago.com/org-img/jsapi/mptools/buttons/render.js"></script>
     <script type="text/javascript">
+    var users = {
+        "MLA": {
+            "client_id": "8915767188486910",
+            "client_secret": "L9yAtxq4RPhBAArbVXfiSMbZvihFiCUf"
+        },
+        "MLB": {
+            "client_id": "1498091458334340",
+            "client_secret": "RQggDMA2g6V9saeZKVSMh2WxZWWCpbCd"
+        },
+        "MLM": {
+            "client_id": "5437095693898413",
+            "client_secret": "mnYiKZ3p0V943Gx3IxLVzGOxKj27XIRb"
+        },
+        "MLV": {
+            "client_id": "630121165566171",
+            "client_secret": "F25NdU4PPyWJ3cltJWBhhQe8q4cSP9Ic"
+        },
+        "MCO": {
+            "client_id": "8076214246968536",
+            "client_secret": "ANLO8yH0EvFWW6O5a8iSEgYHWJW9u4fP"
+        },
+        "MLC": {
+            "client_id": "3856579257398553",
+            "client_secret": "UH1RawXin8oHgcAm5727ui4MY64cPZuW"
+        }
+    };
 
-      var users = {
-        "MLA": {"client_id": "8915767188486910", "client_secret": "L9yAtxq4RPhBAArbVXfiSMbZvihFiCUf"},
-        "MLB": {"client_id": "1498091458334340", "client_secret": "RQggDMA2g6V9saeZKVSMh2WxZWWCpbCd"},
-        "MLM": {"client_id": "5437095693898413", "client_secret": "mnYiKZ3p0V943Gx3IxLVzGOxKj27XIRb"},
-        "MLV": {"client_id": "630121165566171", "client_secret": "F25NdU4PPyWJ3cltJWBhhQe8q4cSP9Ic"},
-        "MCO": {"client_id": "8076214246968536", "client_secret": "ANLO8yH0EvFWW6O5a8iSEgYHWJW9u4fP"},
-        "MLC": {"client_id": "3856579257398553", "client_secret": "UH1RawXin8oHgcAm5727ui4MY64cPZuW"}
-      };
-
-      function setUpMpMode(url) {
+    function setUpMpMode(url) {
         var els = $("[name='t-mode']");
 
-        els.each(function (idx, el) {
-          $(el).attr("data-url", url);
+        els.each(function(idx, el) {
+            $(el).attr("data-url", url);
         });
 
-        els.on("click", function (evt) {
-          var el = $(evt.target);
-          $MPC.openCheckout({
-            url: el.attr("data-url"),
-            mode: el.attr("data-mode")
-          });
+        els.on("click", function(evt) {
+            var el = $(evt.target),
+                url = el.attr("data-url"),
+                mode = el.attr("data-mode");
+
+            if (mode == "iframe") {
+                setTimeout(function() {
+                    setUpIframe(url);
+                }, 0);
+            } else {
+                $MPC.openCheckout({
+                    url: url,
+                    mode: mode
+                });
+            }
         });
 
         $("#t-mode").removeClass("hide");
 
-      }
+    }
 
-      function setUpIframe(url) {
+    function setUpIframe(url) {
         var e = $("#t-iframe");
         e.attr("src", url);
         e.parent().removeClass("hide");
-      }
+    }
 
-      // function setUpMobile(url) {
-      //   var e = $("#t-mobile");
-      //   e.attr("src", url);
-      //   e.parent().removeClass("hide");
-      // }
+    // function setUpMobile(url) {
+    //   var e = $("#t-mobile");
+    //   e.attr("src", url);
+    //   e.parent().removeClass("hide");
+    // }
 
-      function setupPref(pref) {
+    function setupPref(pref) {
 
         var pool = $("#pooles").val();
         var url = "https://www.mercadopago.com/" + (pool ? pool + "/" : "") + "checkout/pay?pref_id=" + pref;
-        setTimeout(function () {
-          setUpMpMode(url);
+        setTimeout(function() {
+            setUpMpMode(url);
         }, 0);
-        setTimeout(function () {
-          setUpIframe(url);
-        }, 0);
+        // setTimeout(function () {
+        //   setUpIframe(url);
+        // }, 0);
         // setTimeout(function () {
         //   setUpMobile(url);
         // }, 0);
-      }
+    }
 
-      function loadPref() {
+    function loadPref() {
         var pref = $("#prefId").val();
         if (!pref)
-          return;
+            return;
         setupPref(pref);
         $("#pooles").trigger("change");
-      }
+    }
 
 
-      function get_access_token(cb) {
+    function get_access_token(cb) {
         $.ajax({
-          type: "POST",
-          url: "https://api.mercadolibre.com/oauth/token",
-          data: {
-            "grant_type": "client_credentials",
-            "client_id": $('#client_id').val(),
-            "client_secret": $('#client_secret').val()
-          },
-          success: function (data, status, xhr) {
-            if (cb)
-              cb(data, status, xhr);
-          },
-          dataType: "json"
+            type: "POST",
+            url: "https://api.mercadolibre.com/oauth/token",
+            data: {
+                "grant_type": "client_credentials",
+                "client_id": $('#client_id').val(),
+                "client_secret": $('#client_secret').val()
+            },
+            success: function(data, status, xhr) {
+                if (cb)
+                    cb(data, status, xhr);
+            },
+            dataType: "json"
         });
-      }
+    }
 
-      function create_preference(access_token, title, price, cb) {
+    function create_preference(access_token, title, price, cb) {
         var json = {
-          "items": [
-            {
-              "title": title,
-              "quantity": 1,
-              "unit_price": parseFloat(price),
-            }
-          ]
+            "items": [{
+                "title": title,
+                "quantity": 1,
+                "unit_price": parseFloat(price),
+            }]
         };
 
         $.ajax({
-          type: "POST",
-          url: "https://api.mercadolibre.com/checkout/preferences?access_token=" + access_token,
-          contentType: "application/json",
-          dataType: "json",
-          data: JSON.stringify(json),
-          success: function (data, status, xhr) {
-            if (cb)
-              cb(data, status, xhr);
-          },
-          error: function (err) {
-            alert("Error:" + JSON.stringify(err));
-          }
+            type: "POST",
+            url: "https://api.mercadolibre.com/checkout/preferences?access_token=" + access_token,
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify(json),
+            success: function(data, status, xhr) {
+                if (cb)
+                    cb(data, status, xhr);
+            },
+            error: function(err) {
+                alert("Error:" + JSON.stringify(err));
+            }
         });
-      }
+    }
 
-      function do_pay(title, price) {
-        get_access_token(function (data) {
-          create_preference(data.access_token, title, price, function (data) {
-            $("#prefId").val(data.id);
-            loadPref();
-          });
+    function do_pay(title, price) {
+        get_access_token(function(data) {
+            create_preference(data.access_token, title, price, function(data) {
+                $("#prefId").val(data.id);
+                loadPref();
+            });
         });
-      }
+    }
 
 
-      $(document).ready(function () {
-        $('[name="pay-button"]').on("click", function () {
+    $(document).ready(function() {
+        $('[name="pay-button"]').on("click", function() {
 
-          var _that = $(this),
-              prev_btn_val = _that.val(),
-              title = $('#title').val(),
-              price = $('#price').val();
+            var _that = $(this),
+                prev_btn_val = _that.val(),
+                title = $('#title').val(),
+                price = $('#price').val();
 
-          if (!price) {
-            alert("Verifique valor");
-            return;
-          }
+            if (!price) {
+                alert("Verifique valor");
+                return;
+            }
 
-          _that.attr("value", "Procesando..");
-          _that.attr("disabled", "disabled");
+            _that.attr("value", "Procesando..");
+            _that.attr("disabled", "disabled");
 
-          do_pay(title, price);
+            do_pay(title, price);
 
-          setTimeout(function (_this, prev_btn_val) {
-            _this.attr("value", prev_btn_val);
-            _this.removeAttr("disabled");
-          }, 3000, _that, prev_btn_val);
+            setTimeout(function(_this, prev_btn_val) {
+                _this.attr("value", prev_btn_val);
+                _this.removeAttr("disabled");
+            }, 3000, _that, prev_btn_val);
         });
 
         $("#btnLoad").on("click", loadPref);
-        $("#pooles").on("change", function () {
-          var pref = $("#prefId").val();
-          if (!pref)
-            return;
-          var pool = $("#pooles").val();
-          var url = "https://www.mercadopago.com/" + (pool ? pool + "/" : "") + "checkout/pay?pref_id=" + pref;
-          $("#pref-preview").attr("href", url);
-          $("#pref-preview").html(url);
+        $("#pooles").on("change", function() {
+            var pref = $("#prefId").val();
+            if (!pref)
+                return;
+            var pool = $("#pooles").val();
+            var url = "https://www.mercadopago.com/" + (pool ? pool + "/" : "") + "checkout/pay?pref_id=" + pref;
+            $("#pref-preview").attr("href", url);
+            $("#pref-preview").html(url);
         });
 
-        $("#btn-resize").on("click", function () {
-          var url = $("#t-iframe").attr("src");
+        $("#btn-resize").on("click", function() {
+            var url = $("#t-iframe").attr("src");
 
-          var w = $("#t-width").val();
-          var h = $("#t-height").val();
+            var w = $("#t-width").val();
+            var h = $("#t-height").val();
 
-          $("#t-iframe").attr("src", "#");
-          $("#t-iframe").attr("width", w);
-          $("#t-iframe").attr("height", h);
-          $("#t-iframe").attr("src", url);
+            $("#t-iframe").attr("src", "#");
+            $("#t-iframe").attr("width", w);
+            $("#t-iframe").attr("height", h);
+            $("#t-iframe").attr("src", url);
         });
-        $("#btn-reset").on("click", function () {
-          $("#t-width").val(815);
-          $("#t-height").val(540);
-          $("#btn-resize").click();
+        $("#btn-reset").on("click", function() {
+            $("#t-width").val(815);
+            $("#t-height").val(540);
+            $("#btn-resize").click();
         });
 
         // $("#btn-mobile-resize").on("click", function () {
@@ -290,12 +333,12 @@
         //   $("#btn-mobile-resize").click();
         // });
 
-        $("#test-users").on("change", function () {
-          var user = $(this).val();
-          var credentials = users[user];
+        $("#test-users").on("change", function() {
+            var user = $(this).val();
+            var credentials = users[user];
 
-          $("#client_id").val(credentials.client_id);
-          $("#client_secret").val(credentials.client_secret);
+            $("#client_id").val(credentials.client_id);
+            $("#client_secret").val(credentials.client_secret);
         });
 
         // $("#t-mobile").on("load", function () {
@@ -305,9 +348,8 @@
         //   }
         // });
         $("#test-users").trigger("change");
-      });
-
-
+    });
     </script>
-  </body>
+</body>
+
 </html>
