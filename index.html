@@ -74,6 +74,16 @@
             <p>
                 <input type="button" name="pay-button" value="Crear">
             </p>
+
+            <div id="t-mode" class="hide">
+                <h1>mp-mode</h1>
+                <input type="button" name="t-mode" data-url="#" data-mode="modal" value="Abrir Modal" />
+                <input type="button" name="t-mode" data-url="#" data-mode="popup" value="Abrir Popup" />
+                <input type="button" name="t-mode" data-url="#" data-mode="blank" value="Abrir Blank" />
+                <input type="button" name="t-mode" data-url="#" data-mode="redirect" value="Abrir Redirect" />
+                <input type="button" name="t-mode" data-url="#" data-mode="iframe" value="Abrir Iframe" />
+            </div>
+
         </div>
         <div class="panel panel-left">
             <h1>Cargar Preferencia</h1>
@@ -91,17 +101,17 @@
             <input type="button" id="btnLoad" value="Cargar" />
             <br>
             <a id="pref-preview" href="" target="_blank"></a>
+            </br>
+            </br>
+            <center>
+                <iframe id="labs" height="350" frameBorder="0" src="http://mercadopago.com/org-img/MP3/checkout/labs.html" >
+                </iframe>
+            </center>
+
         </div>
     </div>
     <div class="panel-down">
-        <div id="t-mode" class="hide">
-            <h1>mp-mode</h1>
-            <input type="button" name="t-mode" data-url="#" data-mode="modal" value="Abrir Modal" />
-            <input type="button" name="t-mode" data-url="#" data-mode="popup" value="Abrir Popup" />
-            <input type="button" name="t-mode" data-url="#" data-mode="blank" value="Abrir Blank" />
-            <input type="button" name="t-mode" data-url="#" data-mode="redirect" value="Abrir Redirect" />
-            <input type="button" name="t-mode" data-url="#" data-mode="iframe" value="Abrir Iframe" />
-        </div>
+    <center>
         <div class="hide sbs">
             <h1>Iframe</h1>
             <div>
@@ -111,6 +121,8 @@
                 <input id="btn-reset" type="button" value="reset">
             </div>
             <iframe id="t-iframe" src="" name="MP-Checkout" width="815" height="540" frameborder="1"></iframe>
+            <br>
+            <br>
         </div>
         <!-- <div class="hide sbs">
         <h1>Mobile</h1>
@@ -119,6 +131,7 @@
         </div>
         <iframe id="t-mobile" src="" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts" name="MP-Checkout" width="384" height="640" frameborder="1"></iframe>
       </div> -->
+      </center>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.mercadopago.com/org-img/jsapi/mptools/buttons/render.js"></script>
@@ -165,6 +178,7 @@
             if (mode == "iframe") {
                 setTimeout(function() {
                     setUpIframe(url);
+                    window.scrollTo(0,document.body.scrollHeight);
                 }, 0);
             } else {
                 $MPC.openCheckout({
