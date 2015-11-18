@@ -1,111 +1,99 @@
 <!doctype html>
 <html>
-  <head>
+
+<head>
     <title></title>
     <meta charset="utf-8" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type="text/css">
-      .hide {
+    .hide {
         display: none !important;
-      }
-
-      .panel-up, .panel-down {
+    }
+    
+    .panel-up,
+    .panel-down {
         width: 100%;
         float: left;
         min-height: 150px;
-      }
-
-      .panel-left, .panel-right {
+    }
+    
+    .panel-left,
+    .panel-right {
         width: 40%;
         float: left;
         min-height: 150px;
-      }
-
-      .panel {
+    }
+    
+    .panel {
         margin-left: 5%;
-      }
-
-      .sbs {
+    }
+    
+    .sbs {
         display: inline-block;
         vertical-align: top;
-      }
-
-      body {
+    }
+    
+    body {
         font-family: Helvetica;
-      }
+    }
+    </style>
+</head>
 
-    </style>    
-  </head>
-  <body>
-   
-    <div class="">
-          <!--
-      <div id="t-mode" class="hide">
-        <h1>mp-mode</h1>
-        <input type="button" name="t-mode" data-url="#" data-mode="modal" value="Abrir Modal" />
-        <input type="button" name="t-mode" data-url="#" data-mode="popup" value="Abrir Popup" />
-        <input type="button" name="t-mode" data-url="#" data-mode="blank" value="Abrir Blank" />
-        <input type="button" name="t-mode" data-url="#" data-mode="redirect" value="Abrir Redirect" />
-      </div> -->
-      <div class="hide sbs">
-        <h1>Iframe</h1>
-        <div>
-          <input id="t-width" type="number" min="1" value="815"> x <input id="t-height" type="number" min="1" value="540"> <input id="btn-resize" type="button" value="cambiar"><input id="btn-reset" type="button" value="reset"> 
-        </div>
-        <iframe id="t-iframe" src="" name="MP-Checkout" width="815" height="540" frameborder="1"></iframe>
-      </div>
-      <div class="hide sbs">
-        <h1>Mobile</h1>
-        <div>
-          <input id="t-mobile-width" type="number" min="1" value="384"> x <input id="t-mobile-height" type="number" min="1" value="640"> <input id="btn-mobile-resize" type="button" value="cambiar"><input id="btn-mobile-reset" type="button" value="reset"> 
-        </div>
-      </div>
+<body>
 
-    </div>
+    <iframe id="t-iframe" src="#" name="MP-Checkout" width="740" height="600" frameborder="0" class="hide"></iframe>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.mercadopago.com/org-img/jsapi/mptools/buttons/render.js"></script>
     <script type="text/javascript">
 
-      function setUpMode(url,mode) {
-        
-          $MPC.openCheckout({
-            url: url,
-            mode: mode
-          });
+    function setUpMode(url, mode, w, h) {
 
-        $("#t-mode").removeClass("hide");
+        switch (mode) {
+            case "iframe":
 
-      }
+                $("#t-iframe").attr("src", url);
 
-      function setupPref(pref, pool, mode) {
+                if (w && h) {
+                    $("#t-iframe").attr("width", w);
+                    $("#t-iframe").attr("height", h);
+                }
+
+                $("#t-iframe").removeClass("hide");
+                break;
+
+            case "modal":
+                $MPC.openCheckout({
+                    url: url,
+                    mode: mode
+                });
+                break;
+        }
+
+    }
+
+    function setupPref(pref, pool, mode, logout, w, h) {
 
         var url = "https://www.mercadopago.com/" + (pool ? pool + "/" : "") + "checkout/pay?pref_id=" + pref;
-        setTimeout(function () {
-          setUpMode(url,mode);
+        if (logout) {
+            url += "&logout=" + logout;
+        }
+        setTimeout(function() {
+            setUpMode(url, mode, w, h);
         }, 0);
 
-      }
+    }
 
-      function setupPref(pref, pool, mode, logout) {
-
-        var url = "https://www.mercadopago.com/" + (pool ? pool + "/" : "") + "checkout/pay?pref_id=" + pref+"&logout="+logout;
-        setTimeout(function () {
-          setUpMode(url,mode);
-        }, 0);
-
-      }
-
-      $(document).ready(function () {
+    $(document).ready(function() {
 
         function getParameterByName(name) {
-        
-          name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-          var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-          results = regex.exec(location.search);
-          return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-        
+
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+
         }
 
         var pref_id = getParameterByName('pref_id');
@@ -115,59 +103,10 @@
         var w = getParameterByName('w') ? getParameterByName('w') : "";
         var h = getParameterByName('h') ? getParameterByName('h') : "";
 
-        if(pref_id && pool && mode){
-        
-          setupPref(pref_id, pool, mode);
-        
-        }
-        if(pref_id && pool && mode && logout){
-        
-          setupPref(pref_id, pool, mode, logout);
-        
-        }
-        if( w && h){
+        setupPref(pref_id, pool, mode, logout, w, h);
 
-          var url = $("#t-iframe").attr("src");
-          var w = $("#t-width").val();
-          var h = $("#t-height").val();
-
-          $("#t-iframe").attr("src", "#");
-          $("#t-iframe").attr("width", w);
-          $("#t-iframe").attr("height", h);
-          $("#t-iframe").attr("src", url);
-        
-        }
-        /* //MOBILE
-        $("#btn-mobile-resize").on("click", function () {
-          var url = $("#t-mobile").attr("src");
-
-          var w = $("#t-mobile-width").val();
-          var h = $("#t-mobile-height").val();
-
-          $("#t-mobile").attr("src", "#");
-          $("#t-mobile").attr("width", w);
-          $("#t-mobile").attr("height", h);
-          $("#t-mobile").attr("src", url);
-        });
-
-        $("#btn-mobile-reset").on("click", function () {
-          $("#t-mobile-width").val(384);
-          $("#t-mobile-height").val(640);
-          $("#btn-mobile-resize").click();
-        });
-
-        $("#t-mobile").on("load", function () {
-          var src = $(this).attr("src");
-
-          if(src && src.indexOf("&mobile=true") === -1) {
-            $("#t-mobile").attr("src", src + "&mobile=true");
-          }
-        });
-      */
-       
-      });
-
-
+    });
     </script>
-  </body>
+</body>
+
 </html>
