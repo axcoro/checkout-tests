@@ -53,6 +53,9 @@
             <p>Valor:
                 <input id="price" type="number" value="1000" min="1">
             </p>
+            <p>Payer Email:
+                <input id="payer_email" type="email" value="">
+            </p>
             <p>
                 Test user
                 <select id="test-users">
@@ -251,7 +254,7 @@
         });
     }
 
-    function create_preference(access_token, title, price, cb) {
+    function create_preference(access_token, title, price, payer_email, cb) {
         var json = {
             "items": [{
                 "title": title,
@@ -259,6 +262,12 @@
                 "unit_price": parseFloat(price),
             }]
         };
+
+        if(payer_email && payer_email !== ""){
+            json.payer = {
+                "email": payer_email
+            }
+        }
 
         $.ajax({
             type: "POST",
@@ -276,9 +285,9 @@
         });
     }
 
-    function do_pay(title, price) {
+    function do_pay(title, price, payer_email) {
         get_access_token(function(data) {
-            create_preference(data.access_token, title, price, function(data) {
+            create_preference(data.access_token, title, price, payer_email, function(data) {
                 $("#prefId").val(data.id);
                 loadPref();
             });
@@ -292,6 +301,7 @@
             var _that = $(this),
                 prev_btn_val = _that.val(),
                 title = $('#title').val(),
+                payer_email = $('#payer_email').val(),
                 price = $('#price').val();
 
             if (!price) {
@@ -302,7 +312,7 @@
             _that.attr("value", "Procesando..");
             _that.attr("disabled", "disabled");
 
-            do_pay(title, price);
+            do_pay(title, price, payer_email);
 
             setTimeout(function(_this, prev_btn_val) {
                 _this.attr("value", prev_btn_val);
