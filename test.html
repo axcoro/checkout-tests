@@ -45,7 +45,14 @@
     <iframe id="t-iframe" src="#" name="MP-Checkout" width="740" height="600" frameborder="0" scrolling="no" class="hide"></iframe>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://www.mercadopago.com/org-img/jsapi/mptools/buttons/render.js"></script>
+    <script type="text/javascript">
+        
+        var $MPCDEV = {
+            messageOrigin: ".*"
+        };
+
+    </script>
+    <script type="text/javascript" src="https://secure.mlstatic.com/mptools/render.js"></script>
     <script type="text/javascript">
 
     function setUpMode(url, mode, w, h) {
@@ -76,6 +83,8 @@
     function setupPref(pref, pool, mode, logout, w, h) {
 
         var url = "https://www.mercadopago.com/" + (pool ? pool + "/" : "") + "checkout/pay?pref_id=" + pref;
+        // para pruebas locales
+        // var url = "http://checkout-lite.mercadopadesa.com:8080/checkout/pay?pref_id=" + pref;
         if (logout) {
             url += "&logout=" + logout;
         }
