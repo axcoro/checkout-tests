@@ -99,7 +99,8 @@
                 <option value="">ROLA</option>
             </select>
             <input type="button" id="btnLoad" value="Abrir" />
-            <input type="button" id="btnLoadDesa" value="Abrir en localhost" />
+            <input type="button" id="btnHttp" value="Abrir en http://localhost" />
+            <input type="button" id="btnHttps" value="Abrir en htts://localhost" />
             <br>
             <a id="pref-preview" href="" target="_blank"></a>
             </br>
@@ -227,12 +228,21 @@
         $("#pooles").trigger("change");
     }
 
-    function loadPrefDesa() {
+    function loadPrefDesaHttp() {
         var pref = $("#prefId").val();
         if (!pref)
             return;
 
         var win = window.open("http://checkout-lite.mercadopadesa.com:8080/checkout/pay?pref_id=" + pref, '_blank');
+        win.focus();
+    }
+
+    function loadPrefDesaHttps() {
+        var pref = $("#prefId").val();
+        if (!pref)
+            return;
+
+        var win = window.open("https://checkout-lite.mercadopadesa.com:8443/checkout/pay?pref_id=" + pref, '_blank');
         win.focus();
     }
 
@@ -321,7 +331,8 @@
         });
 
         $("#btnLoad").on("click", loadPref);
-        $("#btnLoadDesa").on("click", loadPrefDesa);
+        $("#btnHttp").on("click", loadPrefDesaHttp);
+        $("#btnHttps").on("click", loadPrefDesaHttps);
 
         $("#pooles").on("change", function() {
             var pref = $("#prefId").val();
