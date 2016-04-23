@@ -244,18 +244,22 @@
 			tab.focus();
 		});
 
-		document.addEventListener("open_iframe", function(evt) {
+		document.addEventListener("open_remote", function(evt) {
 
 			var prefId = document.getElementById("pref_id").innerText;
 			if (!prefId) return;
 
+			var mode = evt.detail;
+
 			var pool = document.getElementById("pool").getAttribute("data-pool");
 
-			var url = "http://axcoro.github.io/checkout-tests/test.html?pref_id=" + prefId + "&mode=iframe&pool=" + pool;
+			var url = "http://axcoro.github.io/checkout-tests/test.html?pref_id=" + prefId + "&mode=" + mode + "&pool=" + pool;
+			
 			if (url) {
 				var tab = window.open(url, '_blank');
 				tab.focus();
 			}
+			
 		});
 
 		document.addEventListener("render", function(evt) {
@@ -263,7 +267,10 @@
 			var url = buildPreferenceUrl();
 			switch (mode) {
 				case "iframe":
-					fireEvent("open_iframe");
+					fireEvent("open_remote", "iframe");
+					break;
+				case "modal":
+					fireEvent("open_remote", "modal");
 					break;
 				default:
 					$MPC.openCheckout({
