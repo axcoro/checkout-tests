@@ -41,36 +41,31 @@
 </head>
 
 <body>
-
-    <iframe id="t-iframe" src="#" name="MP-Checkout" width="740" height="600" frameborder="0" scrolling="no" class="hide"></iframe>
-
+    <iframe id="MP-Checkout-IFrame" src="#" name="MP-Checkout" width="740" height="600" frameborder="0" scrolling="no" class="hide"></iframe>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript">
-        
-        var $MPCDEV = {
-            messageOrigin: ".*"
-        };
-
+    var $MPCDEV = {
+        messageOrigin: ".*"
+    };
     </script>
     <script type="text/javascript" src="https://secure.mlstatic.com/mptools/render.js"></script>
     <script type="text/javascript">
-
     function setUpMode(url, mode, w, h) {
 
         switch (mode) {
             case "iframe":
 
-                $("#t-iframe").attr("src", url);
+                $("#MP-Checkout-IFrame").attr("src", url);
 
                 if (w && h) {
-                    $("#t-iframe").attr("width", w);
-                    $("#t-iframe").attr("height", h);
+                    $("#MP-Checkout-IFrame").attr("width", w);
+                    $("#MP-Checkout-IFrame").attr("height", h);
                 }
 
-                $("#t-iframe").removeClass("hide");
+                $("#MP-Checkout-IFrame").removeClass("hide");
                 break;
 
-            case "modal":
+            default:
                 $MPC.openCheckout({
                     url: url,
                     mode: mode
